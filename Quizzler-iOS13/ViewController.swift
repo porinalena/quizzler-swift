@@ -41,8 +41,10 @@ class ViewController: UIViewController {
         
         if questionNum + 1 < quiz.count {
         questionNum += 1
+        } else {
+            questionNum = 0
+        }
         updateUI()
-        } 
     }
     func updateUI() {
         questionLabel.text = quiz[questionNum][0]

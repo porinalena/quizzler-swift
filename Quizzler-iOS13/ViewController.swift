@@ -28,7 +28,6 @@ class ViewController: UIViewController {
         Question(q: "The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.", a: "False"),
         Question(q: "No piece of square dry paper can be folded in half more than 7 times.", a: "False"),
         Question(q: "Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", a: "True")
-
     ]
     
     var questionNum = 0
@@ -44,20 +43,30 @@ class ViewController: UIViewController {
         let actualAnswer = quiz[questionNum].answer
         
         if userAnswer == actualAnswer {
-            print("Right!")
+            sender.backgroundColor = UIColor.green
+        
         } else {
-            print("Wrong!")
+            sender.backgroundColor = UIColor.red
         }
+        
         
         if questionNum + 1 < quiz.count {
         questionNum += 1
+            progressBar.progress = Float(questionNum)/Float(quiz.count)
+                  
         } else {
             questionNum = 0
         }
-        updateUI()
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (timer) in
+            self.updateUI()
+        }
     }
+    
     func updateUI() {
+        
         questionLabel.text = quiz[questionNum].text
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
     }
     
 }
